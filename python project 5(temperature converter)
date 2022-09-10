@@ -1,0 +1,9 @@
+farenheit = int(input('type in farenheit to be converted to celcius: '))
+celcius = int(input('type in celcius to be converted to farenheit: '))
+
+C_result = 5/9 * (farenheit - 32)
+F_result = (celcius * 1.8) + 32
+
+print(farenheit,'°F is',C_result,'in celcius') 
+
+print(celcius, '°C is',F_result,'in farenheit')
