@@ -1,0 +1,7 @@
+import random
+
+number = random.randrange(0,10)
+
+while int(input("type a number: ")) != number:
+    print("try again")
+print("correct")
