@@ -1,0 +1,28 @@
+player1 = input("Rock Paper or scissors: ")
+player2 = input("Rock Paper or scissors: ") 
+
+Paper = 'P'
+Scissors = 'S' 
+Rock = 'R' 
+
+if player1 == 'P' and player2 == 'R':
+    print('player1 wins')
+
+if player1 == 'R' and player2 == 'P':
+    print('player2 wins') 
+    
+if player1 == 'S' and player2 == 'P':
+    print('player1 wins') 
+    
+if player1 == 'P' and player2 == 'S':
+    print('player2 wins') 
+    
+if player1 == 'R' and player2 == 'S':
+    print('player1 wins') 
+
+if player1 == 'S' and player2 == 'R':
+    print('player2 wins') 
+
+else:
+    print("use the correct letter with the correct capatalization")
+    
