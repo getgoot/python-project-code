@@ -1,0 +1,29 @@
+import random
+    
+
+
+numlist = list(str(random.randint(100,999))) 
+print(numlist) 
+
+four_numbers = True
+
+while four_numbers ==  True:
+    user = list(input("type a random number")) 
+    paper = 0 
+    rock = 0
+    end = 0
+    
+    for i in range(3):
+        if user[i] == numlist[i]:
+            rock += 1
+        elif user[i] in numlist:
+            paper += 1 
+        
+        if rock == 3:
+            end += 1
+        print('you have',rock,'rocks and',paper,'papers')
+        
+        if end == 1:   
+            four_numbers = False
+            print('you win')
+    
