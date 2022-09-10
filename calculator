@@ -1,0 +1,20 @@
+Operation1 = input("1st number") 
+Operation2 = input("2nd number") 
+Operation = input("Operation?") 
+
+if (Operation == '+'):
+ result = int(Operation1) + int(Operation2)
+
+elif (Operation == '-'):
+ result = int(Operation1) - int(Operation2) 
+
+elif (Operation == '*'):
+ result = int(Operation1) * int(Operation2) 
+
+elif (Operation == '/'):
+ result = int(Operation1) / int(Operation2)
+
+print((result)) 
+input("do you want to continue?")
+if (input == 'Y'):
+ continue (Operation)
