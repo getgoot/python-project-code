@@ -1,0 +1,133 @@
+import re
+import random
+
+class AlienBot:
+    # Potential negative responses
+    negative_responses = ("no", "nope", "nah", "naw", "not a chance", "sorry")
+    # Keywords for exiting the conversation
+    exit_commands = ("quit", "pause", "exit", "goodbye", "bye", "later")
+    # Random starter questions
+    random_questions = (
+        "Why are you here? ",
+        "Are there many humans like you? ",
+        "What do you consume for sustenance? ",
+        "Is there intelligent life on this planet? ",
+        "Does Earth have a leader? ",
+        "What planets have you visited? ",
+        "What technology do you have on this planet? "
+    )
+    
+    general_responses = (
+        "Please tell me more. ",
+        "Tell me more! ",
+        "Why do you say that? ",
+        "I see. Can you elaborate? ",
+        "Interesting. Can you tell me more? ",
+        "I see. How do you think? ",
+        "Why? ",
+        "How do you think I feel when you say that? "
+    )
+    # Inside the AlienBot class
+    def __init__(self):
+        self.alienbabble = {
+            'describe_planet_intent': r'.*(tell me about your planet|interested in your planet).*',
+            'answer_why_intent': r'.*(why are you here|why are you asking me so many questions).*',
+            'cubed_intent': r'.*cube.*(number|digit|integer|3).*'
+        }
+
+    # Define greet() below:
+    def greet(self):
+        self.name = input("Hello there, what's your name? ")
+
+        will_help = input(f"Hi {self.name}, I'm Etcetera. I'm not from this planet. Will you help me learn about your planet? ")
+
+        if will_help.lower() in self.negative_responses:  # Use lower() to make comparison case-insensitive
+            print("Ok, have a nice Earth day!")
+            return
+        self.chat()  # Call the chat method
+
+    # Define chat() method to handle the conversation:
+    def chat(self):
+        while True:
+            # Ask about sustenance initially
+            print("What do you consume for sustenance? ")
+            user_input = input().lower()
+
+            while not self.make_exit(user_input):
+                # Call the match_reply() method
+                self.match_reply(user_input)
+
+                # Ask a new random question
+                print(random.choice(self.random_questions))
+                user_input = input().lower()
+
+            print("Exiting conversation. Goodbye!")
+
+    def make_exit(self, reply):
+        for command in self.exit_commands:
+            if command in reply:
+                print("Ok, have a nice Earth day!")
+                return True
+        return False
+
+    # Inside the AlienBot class
+    def describe_planet_intent(self):
+        responses = [
+            "My planet is a utopia of diverse organisms and species.",
+            "I am from Opidipus, the capital of the Wayward Galaxies."
+        ]
+        return random.choice(responses)
+
+    def answer_why_intent(self):
+        print("Inside .answer_why_intent()")
+        responses = [
+            "I come in peace.",
+            "I am here to collect data on your planet and its inhabitants.",
+            "I heard the coffee is good."
+        ]
+        return random.choice(responses)
+
+    # Inside the AlienBot class
+    # Inside the AlienBot class
+    def cubed_intent(self, number):
+        try:
+            num = int(number)  # Convert the input to an integer
+            cubed_value = num ** 3  # Calculate the cube
+            response = f"The cube of {num} is {cubed_value}. Isn't that cool?"
+            return response
+        except ValueError:
+            return "Please provide a valid number to cube."
+
+    # ... (existing code)
+
+    # Adjust indentation for match_reply
+    def match_reply(self, user_input):
+        matched_intent = None
+
+        for intent, regex_pattern in self.alienbabble.items():
+            if re.match(regex_pattern, user_input):
+                matched_intent = intent
+                break  # Stop searching once we find a matching intent
+
+        if matched_intent:
+            if matched_intent == 'describe_planet_intent':
+                print(self.describe_planet_intent())
+            elif matched_intent == 'answer_why_intent':
+                print(self.answer_why_intent())
+            elif matched_intent == 'cubed_intent':
+                match = re.search(r'\d+', user_input)  # Extract the number using a simpler regex
+                if match:
+                    number = match.group()
+                    print(self.cubed_intent(number))
+                else:
+                    print("Please provide a number to cube.")
+        else:
+            # If no intent is matched, provide a random general response
+            print(random.choice(self.general_responses))
+
+# Create an instance of AlienBot and call greet()
+my_bot = AlienBot()
+my_bot.greet()
+
+
+
